@@ -92,7 +92,7 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
                     <select class="form-control" name="Perfil" id="Perfil" required>
                       <option selected disabled value="">Escolha uma opção...</option>
                       <option value="Visualizador"> Visualizador </option>
-                      <option value="Administrador"> Administrador </option>
+                      <option value="Operador"> Operador </option>
                     </select>
                   </div>
                 </div>
