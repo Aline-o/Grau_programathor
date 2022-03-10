@@ -13,7 +13,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Cliente</a>
-            <a class="dropdown-item" href="cadastrar/categoria.blade.php">Categoria</a>
+            <a class="dropdown-item" href="../cadastrar/categoria.blade.php">Categoria</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -22,7 +22,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Cliente</a>
-              <a class="dropdown-item" href="#">Categoria</a>
+              <a class="dropdown-item" href="../visualizar/categoria.blade.php">Categoria</a>
             </div>
           </li>
       </ul>

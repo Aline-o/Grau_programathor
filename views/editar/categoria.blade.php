@@ -1,33 +1,27 @@
 <?php 
-// CONEXÃO COM O BANCO
 include_once('../../BD/config.php');
+  if(isset($_REQUEST['editId']) and $_REQUEST['editId']!=""){
+    $row	=	$db->getAllRecords('categoria','*',' AND idCategoria="'.$_REQUEST['editId'].'"');
+  }
 
-if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
-  extract($_REQUEST);
-  if($NomeCategoria==""){
-    // mensagem de campo obrigatorio
-    header('location:'.$_SERVER['PHP_SELF'].'?msg=robr');
-    exit;
-  }else{
-    // se pá pode apagar, não testei sem
-    $userCount	=	$db->getQueryCount('categoria','idCategoria');
-    // colunas da tabela
+  if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
+    extract($_REQUEST);
+    if($NomeCategoria==""){
+      header('location:'.$_SERVER['PHP_SELF'].'?editId='.$_REQUEST['editId'].'&msg=robr');  //msg campo obrigatorio
+      exit;
+    }
     $data	=	array(
-      'NomeCategoria'=> $NomeCategoria, //colunas                        
+      'NomeCategoria'=>$NomeCategoria,
     );
-    $insert	=	$db->insert('categoria',$data);
-    if($insert){
-      // mensagem add com sucesso
-      //header('location: ../visualizar/categoria.blade.php?msg=radd');
-      header('location: ../../index.php?msg=radd');
+    $update	=	$db->update('categoria',$data,array('idCategoria'=>$editId));
+    if($update){
+      header('location: ../visualizar/categoria.blade.php?msg=ratt'); #<!-- success -->
       exit;
     }else{
-      // mensagem erro
-      header('location: ../visualizar/categoria.blade.php?msg=rerr');
+      header('location: ../visualizar/categoria.blade.php?msg=rnna'); #<!-- nao teve alteracao -->
       exit;
     }
   }
-}
 ?>
 
 <!doctype html>
@@ -50,7 +44,7 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Cadastrar Categoria</li>
+                <li class="breadcrumb-item active" aria-current="page">Editar Categoria</li>
               </ol>
             </nav>
           </div>
@@ -62,13 +56,14 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
                 <div class="row justify-content-md-center">
                   <div class="form-group col-sm-10">
                     <label class="font-weight-bold" for="NomeCategoria">Categoria</label>
-                    <input type="text" class="form-control" name="NomeCategoria" placeholder="Insira o nome da Categoria"required autofocus>
+                    <input type="text" class="form-control" name="NomeCategoria" id="NomeCategoria" value="<?php echo $row[0]['NomeCategoria']; ?>" placeholder="<?php echo $row[0]['NomeCategoria']; ?>" autofocus required>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-sm-4 offset-md-1">
-                    <button type="submit" name="submit" value="submit" id="submit" class="btn btn-success">Salvar Registro</button>
+                    <input type="hidden" name="editId" id="editId" value="<?php echo $_REQUEST['editId']?>">
+                    <button type="submit" name="submit" value="submit" id="submit" class="btn btn-success">Editar Registro</button>
                   </div>
                 </div>
               </form>

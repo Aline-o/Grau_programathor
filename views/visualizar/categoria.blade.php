@@ -22,10 +22,18 @@ $userData	=	$db->getAllRecords('categoria','*',$condition,'ORDER BY idCategoria 
       <div class="row flex-xl-nowrap">
         
         <main class="col-12 col-md-12 col-xl-12 py-md-3 pl-md-1 bd-content" role="main">   
+            <div class="col align-self-center col-sm-10  offset-md-1">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Relatório de Categorias</li>
+                    <div class="col align-self-right"> <a class="btn btn-primary my-2 my-sm-0 pull-right" href="../cadastrar/categoria.blade.php" role="button">Novo cadastro</a></div>
+                  </ol>
+                </nav>
+              </div>
+
+              
           <div class="card border-light align-self-center col-sm-10  offset-md-1">
-            <h4 class="card-header text-dark">Relatório de Categorias
-              <a class="btn btn-primary my-2 my-sm-0 pull-right" href="../cadastrar/categoria.blade.php" role="button">Novo cadastro</a>
-            </h4>
             <div class="card-body">
 
               <?php include_once('../../include/alertMsg.php');?>
@@ -68,8 +76,8 @@ $userData	=	$db->getAllRecords('categoria','*',$condition,'ORDER BY idCategoria 
                     <td><?php echo $s;?></td>
                     <td><?php echo $val['NomeCategoria'];?></td>
                     <td align="center">
-                      <a href="../update/categoria.blade.php?editId=<?php echo $val['idCategoria'];?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> Editar</a> | 
-                      <a href="../delete/categoria.php?delId=<?php echo $val['idCategoria'];?>" class="text-danger" onClick="return confirm('Tem certeza que deseja excluir?');"><i class="fa fa-fw fa-trash"></i> Deletar</a>
+                      <a href="../editar/categoria.blade.php?editId=<?php echo $val['idCategoria'];?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> Editar</a> | 
+                      <a href="../deletar/categoria.php?delId=<?php echo $val['idCategoria'];?>" class="text-danger" onClick="return confirm('Tem certeza que deseja excluir?');"><i class="fa fa-fw fa-trash"></i> Deletar</a>
                     </td>
                   </tr>
                   
