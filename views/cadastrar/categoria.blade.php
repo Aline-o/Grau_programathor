@@ -18,8 +18,7 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
     $insert	=	$db->insert('categoria',$data);
     if($insert){
       // mensagem add com sucesso
-      //header('location: ../visualizar/categoria.blade.php?msg=radd');
-      header('location: ../../index.php?msg=radd');
+      header('location: ../visualizar/categoria.blade.php?msg=radd');
       exit;
     }else{
       // mensagem erro
