@@ -27,7 +27,7 @@ if($btnLogin){
 				$_SESSION['Login'] = $row_usuario['Login'];
 				$_SESSION['Status'] = $row_usuario['Status'];
 				$_SESSION['Perfil'] = $row_usuario['Perfil'];
-				header("Location: ../visualizar/usuario.blade.php"); //login ok
+				header("Location: ../home/inicio.blade.php"); //login ok
 			}else{
 				header("Location: login.blade.php?msg=lerr");
 			}

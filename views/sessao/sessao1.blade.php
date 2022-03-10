@@ -1,9 +1,3 @@
-<?php
-
-session_start();
-
-?>
-
 <!doctype html>
 <html lang="en">
   <?php include_once('../headers/head.blade.php'); ?>

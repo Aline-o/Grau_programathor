@@ -23,12 +23,13 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
   }else{
     // se pá pode apagar, não testei sem
     $userCount	=	$db->getQueryCount('usuario','idUsuario');
+    $SenhaCripto = password_hash($Senha, PASSWORD_DEFAULT);
     // colunas da tabela
     $data	=	array(
       'Nome'=> $Nome, //colunas   
       'Perfil'=> $Perfil, //colunas   
       'Login'=> $Login, //colunas   
-      'Senha'=> $Senha, //colunas                    
+      'Senha'=> $SenhaCripto, //colunas                    
     );
     $insert	=	$db->insert('usuario',$data);
     if($insert){
