@@ -1,5 +1,11 @@
 <?php 
 include_once('../../BD/config.php');
+
+//caso não esteja logado ou não seja operador...
+if( empty($_SESSION['Login']) || $_SESSION['Perfil']!="Operador" )
+header("Location: ../sessao/accessdenied.blade.php");
+
+
   if(isset($_REQUEST['editId']) and $_REQUEST['editId']!=""){
     $row	=	$db->getAllRecords('categoria','*',' AND idCategoria="'.$_REQUEST['editId'].'"');
   }
@@ -43,7 +49,7 @@ include_once('../../BD/config.php');
           <div class="col align-self-center col-sm-10  offset-md-1">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="../home/inicio.blade.php">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Editar Categoria</li>
               </ol>
             </nav>

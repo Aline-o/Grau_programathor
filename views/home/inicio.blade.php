@@ -13,7 +13,7 @@
         <div class="card text-white bg-primary mb-3 offset-md-1" style="border-left: 6px solid #2196F3;">
           <div class="card-body">
             <h5 class="card-title">Bem-vindo!</h5>
-            <p class="card-text">Este sistema tem como função cadastrar os clientes matriculados na academia Força de Vontade.</p>
+            <p class="card-text">Este sistema tem como função cadastrar os clientes matriculados na academia Força do Hábito.</p>
           </div>
         </div>
       </main>

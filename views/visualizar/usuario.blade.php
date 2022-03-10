@@ -31,9 +31,8 @@ $userData	=	$db->getAllRecords('usuario','*',$condition,'ORDER BY idUsuario DESC
             <div class="col align-self-center col-sm-10  offset-md-1">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../home/inicio.blade.php">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Relatório de Usuários</li>
-                    <div class="col align-self-right"> <a class="btn btn-primary my-2 my-sm-0 pull-right" href="../cadastrar/usuario.blade.php" role="button">Novo cadastro</a></div>
                   </ol>
                 </nav>
               </div>
@@ -76,7 +75,14 @@ $userData	=	$db->getAllRecords('usuario','*',$condition,'ORDER BY idUsuario DESC
                     <th scope="col">Nome do Usuário</th>
                     <th scope="col">Login</th>
                     <th scope="col">Perfil</th>
+                    <?php
+                    //caso esteja logado e seja operador...
+                      if( !empty($_SESSION['Login']) && $_SESSION['Perfil']=="Operador" ){ 
+                    ?>
                     <th scope="col" class="text-center">Menu</th>
+                    <?php
+                      }
+                    ?>  
                   </tr>
                 </thead>
                 <tbody>
@@ -93,10 +99,17 @@ $userData	=	$db->getAllRecords('usuario','*',$condition,'ORDER BY idUsuario DESC
                     <td><?php echo $val['Nome'];?></td>
                     <td><?php echo $val['Login'];?></td>
                     <td><?php echo $val['Perfil'];?></td>
+                    <?php
+                    //caso esteja logado e seja operador...
+                      if( !empty($_SESSION['Login']) && $_SESSION['Perfil']=="Operador" ){ 
+                    ?>
                     <td align="center">
                       <a href="../editar/usuario.blade.php?editId=<?php echo $val['idUsuario'];?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> Editar</a> | 
                       <a href="../deletar/usuario.php?delId=<?php echo $val['idUsuario'];?>" class="text-danger" onClick="return confirm('Tem certeza que deseja excluir?');"><i class="fa fa-fw fa-trash"></i> Deletar</a>
                     </td>
+                    <?php
+                      }
+                    ?>
                   </tr>
                   
                   <?php 

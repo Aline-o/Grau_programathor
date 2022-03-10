@@ -2,6 +2,13 @@
 // CONEXÃO COM O BANCO
 include_once('../../BD/config.php');
 
+
+//caso não esteja logado ou não seja operador...
+if( empty($_SESSION['Login']) || $_SESSION['Perfil']!="Operador" )
+header("Location: ../sessao/accessdenied.blade.php");
+
+                    
+
 if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
   extract($_REQUEST);
   if($NomeCategoria==""){
@@ -48,7 +55,7 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
           <div class="col align-self-center col-sm-10  offset-md-1">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="../home/inicio.blade.php">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Cadastrar Categoria</li>
               </ol>
             </nav>

@@ -10,7 +10,8 @@ session_start();
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <?php
-          if( !empty($_SESSION['Login']) && $_SESSION['Perfil']=="Operador" ){ //caso esteja logado...
+        //caso esteja logado e seja operador...
+          if( !empty($_SESSION['Login']) && $_SESSION['Perfil']=="Operador" ){ 
         ?>
 
         <li class="nav-item dropdown">
@@ -18,7 +19,7 @@ session_start();
             Cadastrar
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Cliente</a>
+            <a class="dropdown-item" href="../cadastrar/usuario.blade.php">Cliente</a>
             <a class="dropdown-item" href="../cadastrar/categoria.blade.php">Categoria</a>
           </div>
         </li>
@@ -31,7 +32,7 @@ session_start();
               Relatório
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Cliente</a>
+              <a class="dropdown-item" href="../visualizar/usuario.blade.php">Cliente</a>
               <a class="dropdown-item" href="../visualizar/categoria.blade.php">Categoria</a>
             </div>
           </li>
