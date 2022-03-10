@@ -13,5 +13,8 @@
         echo	'<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Ocorreu um erro <strong>Por favor, tente novamente!</strong></div>';
     }elseif(isset($_REQUEST['msg']) and $_REQUEST['msg']=="lerr"){
         echo	'<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Login ou senha incorretos. <strong>Por favor, tente novamente!</strong></div>';
+    }elseif(isset($_REQUEST['msg']) and $_REQUEST['msg']=="ldes"){
+        echo	'<div class="alert alert-success"><i class="fa fa-thumbs-up"></i> Deslogado com sucesso!</div>';
     }
+
 ?>
