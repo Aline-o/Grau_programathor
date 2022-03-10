@@ -17,7 +17,7 @@
               <div class="card-body text-danger text-center">                
                 <div class="card-title">Você não tem permissão para acessar essa página!</div>
                 <div class="col-sm-12">
-                  <p>Clique <a href="login.blade.php">aqui</a> para voltar.</p>
+                  <p class="text-secondary">Clique <a href="login.blade.php">aqui</a> para voltar.</p>
                 </div>
               </div>
               </div>

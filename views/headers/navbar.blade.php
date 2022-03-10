@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="../home/inicio.blade.php">CRM<span class="navbar-text">Clients</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,6 +29,20 @@
           </li>
       </ul>
       <div class="">
-        <a class="navbar-text" href="#">usuario</a>
+        <?php
+          if( !empty($_SESSION['Login']) ){ //caso esteja logado...
+        ?>
+
+        <a class="navbar-text" href="#"><?php echo $_SESSION['Login']; ?></a>
+        
+        <?php
+          }else{
+        ?>
+
+        <a class="navbar-text" href="../sessao/login.blade.php">Login</a>
+
+        <?php
+          }
+        ?>
       </div>
   </nav>
