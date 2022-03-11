@@ -1,3 +1,3 @@
 <?php 
-echo "hello world";
+header('location: views/home/inicio.blade.php');
 ?>
