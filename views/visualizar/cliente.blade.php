@@ -125,7 +125,20 @@ $userData	=	$db->getAllRecords('cliente','*',$condition,'ORDER BY idCliente DESC
                   <tr>
                     <td><?php echo $s;?></td>
                     <td><?php echo $val['Nome'];?></td>
-                    <td><?php echo $val2['NomeCategoria'];?></td>
+                    <?php
+                      if($val2['NomeCategoria']=="Prêmio"){
+                        $CorTexto="text-warning";
+                      }elseif($val2['NomeCategoria']=="Grátis"){
+                        $CorTexto="text-success";
+                      }elseif($val2['NomeCategoria']=="Normal"){
+                        $CorTexto="text-primary";
+                      }else{
+                        $CorTexto="text-dark";
+                      }
+                    ?>
+
+                    <td class="<?php echo $CorTexto; ?>"><?php echo $val2['NomeCategoria'];?></td>
+                    
                     <?php
                     //caso esteja logado e seja operador...
                       if( !empty($_SESSION['Login']) && $_SESSION['Perfil']=="Operador" ){ 
