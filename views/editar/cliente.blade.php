@@ -1,36 +1,33 @@
 <?php 
-// CONEXÃO COM O BANCO
 include_once('../../BD/config.php');
 
-if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
-  extract($_REQUEST);
-  if($Nome==""){
-    // mensagem de campo obrigatorio
-    header('location:'.$_SERVER['PHP_SELF'].'?msg=robr');
-    exit;
-  }if($Cliente_idCategoria==""){
-    // mensagem de campo obrigatorio
-    header('location:'.$_SERVER['PHP_SELF'].'?msg=robr');
-    exit;
-  }else{
-    $userCount	=	$db->getQueryCount('cliente','idCliente');
-    // colunas da tabela
+  if(isset($_REQUEST['editId']) and $_REQUEST['editId']!=""){
+    $row	=	$db->getAllRecords('cliente, categoria','*',' AND idCliente="'.$_REQUEST['editId'].'"');
+  }
+
+  if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
+    extract($_REQUEST);
+    if($Nome==""){
+      header('location:'.$_SERVER['PHP_SELF'].'?editId='.$_REQUEST['editId'].'&msg=robr');  //msg campo obrigatorio
+      exit;
+    }if($Cliente_idCategoria==""){
+      // mensagem de campo obrigatorio
+      header('location:'.$_SERVER['PHP_SELF'].'?msg=robr');
+      exit;
+    }
     $data	=	array(
-      'Nome'=> $Nome, //colunas   
-      'Cliente_idCategoria'=> $Cliente_idCategoria, //colunas   
+      'Nome'=>$Nome,
+      'Cliente_idCategoria'=>$Cliente_idCategoria,
     );
-    $insert	=	$db->insert('cliente',$data);
-    if($insert){
-      // mensagem add com sucesso
-      header('location: ../visualizar/cliente.blade.php?msg=radd');
+    $update	=	$db->update('cliente',$data,array('idCliente'=>$editId));
+    if($update){
+      header('location: ../visualizar/cliente.blade.php?msg=ratt'); #<!-- success -->
       exit;
     }else{
-      // mensagem erro
-      header('location: ../visualizar/cliente.blade.php?msg=rerr');
+      header('location: ../visualizar/cliente.blade.php?msg=rnna'); #<!-- nao teve alteracao -->
       exit;
     }
   }
-}
 ?>
 
 <!doctype html>
@@ -49,8 +46,7 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
       if( empty($_SESSION['Login']) || $_SESSION['Perfil']!="Operador" ){
         header("Location: ../sessao/accessdenied.blade.php");
         }
-      ?>
-      
+      ?>      
 
         <main class="col-12 col-md-12 col-xl-12 py-md-3 pl-md-1 bd-content" role="main">
           
@@ -58,7 +54,7 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="../home/inicio.blade.php">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Cadastrar Cliente</li>
+                <li class="breadcrumb-item active" aria-current="page">Editar cliente</li>
               </ol>
             </nav>
           </div>
@@ -67,29 +63,30 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
               <?php include_once('../../include/alertMsg.php');?>
               
               <form method="POST">
+
+                <?php 
+                  $condition	=	'';
+                  if(isset($_REQUEST['NomeCategoria']) and $_REQUEST['NomeCategoria']!=""){
+                    $condition	.=	' AND NomeCategoria LIKE "%'.$_REQUEST['NomeCategoria'].'%" ';
+                  }
+                  if(isset($_REQUEST['idCategoria']) and $_REQUEST['idCategoria']!=""){
+                    $condition	.=	' AND idCategoria LIKE "%'.$_REQUEST['idCategoria'].'%" ';
+                  }
+                  $condition	.=	' AND Status = 1 ';
+                  $userData	=	$db->getAllRecords('categoria','*', $condition,'ORDER BY idCategoria DESC');
+                ?>  
+
                 <div class="row justify-content-md-center">
-                  <div class="form-group col-sm-10">
+                  <div class="form-group col-sm-6">
                     <label class="font-weight-bold" for="Nome">Nome do cliente</label>
-                    <input type="text" class="form-control" name="Nome" placeholder="Insira seu nome completo"required autofocus>
+                    <input type="text" class="form-control" name="Nome" id="Nome" value="<?php echo $row[0]['Nome']; ?>" placeholder="<?php echo $row[0]['Nome']; ?>" autofocus required>
                   </div>
-
-                  <div class="form-group col-sm-10">
-                    <label for="Cliente_idCategoria">Categoria</label>
+                  <div class="form-group col-sm-4">
+                    <label  class="font-weight-bold" for="Cliente_idCategoria">Categoria</label>
                     <select class="form-control" name="Cliente_idCategoria" id="Cliente_idCategoria" required>
-                      <option selected disabled value="">Escolha uma opção...</option>
-
-                      <?php 
-                      $condition	=	'';
-                      if(isset($_REQUEST['NomeCategoria']) and $_REQUEST['NomeCategoria']!=""){
-                        $condition	.=	' AND NomeCategoria LIKE "%'.$_REQUEST['NomeCategoria'].'%" ';
-                      }
-                      if(isset($_REQUEST['idCategoria']) and $_REQUEST['idCategoria']!=""){
-                        $condition	.=	' AND idCategoria LIKE "%'.$_REQUEST['idCategoria'].'%" ';
-                      }
-                      // Status 1 para valores não "deletados" pelo cliente
-                      $condition	.=	' AND Status = 1 ';
-                      $userData	=	$db->getAllRecords('categoria','*', $condition,'ORDER BY idCategoria DESC');
-                    
+                      <option selected value="<?php echo $row[0]['idCategoria']; ?>"><?php echo $row[0]['NomeCategoria']; ?></option>
+                      
+                      <?php                         
                       if(count($userData)>0){
                         $s	=	'';
                         foreach($userData as $val){
@@ -102,21 +99,21 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
                         }
                       }
                       ?>
-
                     </select>
-                  
                   </div>
                 </div>
-              
               </div>
+
+                  
 
                 <div class="row">
                   <div class="col-sm-4 offset-md-1">
-                    <button type="submit" name="submit" value="submit" id="submit" class="btn btn-success">Salvar Registro</button>
+                    <input type="hidden" name="editId" id="editId" value="<?php echo $_REQUEST['editId']?>">
+                    <button type="submit" name="submit" value="submit" id="submit" class="btn btn-success">Editar Registro</button>
                   </div>
                 </div>
               </form>
-            </div>
+            </div>  
           </div>
         </main>
     </div>

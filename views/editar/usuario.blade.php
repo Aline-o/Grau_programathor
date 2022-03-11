@@ -1,10 +1,6 @@
 <?php 
 include_once('../../BD/config.php');
 
-//caso não esteja logado ou não seja operador...
-if( empty($_SESSION['Login']) || $_SESSION['Perfil']!="Operador" )
-header("Location: ../sessao/accessdenied.blade.php");
-
   if(isset($_REQUEST['editId']) and $_REQUEST['editId']!=""){
     $row	=	$db->getAllRecords('usuario','*',' AND idUsuario="'.$_REQUEST['editId'].'"');
   }
@@ -51,9 +47,13 @@ header("Location: ../sessao/accessdenied.blade.php");
     <?php //include_once('../header.blade.php'); ?>
 
     <div class="container-fluid">
-      <?php include_once('../headers/navbar.blade.php'); ?>
-
+      <?php include_once('../headers/navbar.blade.php'); 
       
+      //caso não esteja logado ou não seja operador...
+      if( empty($_SESSION['Login']) || $_SESSION['Perfil']!="Operador" ){
+        header("Location: ../sessao/accessdenied.blade.php");
+        }
+      ?>      
 
         <main class="col-12 col-md-12 col-xl-12 py-md-3 pl-md-1 bd-content" role="main">
           

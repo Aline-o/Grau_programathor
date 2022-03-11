@@ -19,7 +19,8 @@ session_start();
             Cadastrar
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../cadastrar/usuario.blade.php">Cliente</a>
+            <a class="dropdown-item" href="../cadastrar/usuario.blade.php">Usuário</a>
+            <a class="dropdown-item" href="../cadastrar/cliente.blade.php">Cliente</a>
             <a class="dropdown-item" href="../cadastrar/categoria.blade.php">Categoria</a>
           </div>
         </li>
@@ -32,7 +33,8 @@ session_start();
               Relatório
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../visualizar/usuario.blade.php">Cliente</a>
+              <a class="dropdown-item" href="../visualizar/usuario.blade.php">Usuário</a>
+              <a class="dropdown-item" href="../visualizar/cliente.blade.php">Cliente</a>
               <a class="dropdown-item" href="../visualizar/categoria.blade.php">Categoria</a>
             </div>
           </li>
@@ -48,6 +50,19 @@ session_start();
           </button>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="../sessao/sair.php" type="button">Deslogar</a>
+            <?php
+              if( $_SESSION['Perfil']=="Operador" ){ //caso esteja logado...
+            ?>
+
+
+
+
+
+
+
+            <?php
+              }
+            ?>
           </div>
         </div>
         

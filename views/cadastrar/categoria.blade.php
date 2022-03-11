@@ -39,9 +39,8 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
     <?php //include_once('../header.blade.php'); ?>
 
     <div class="container-fluid">
-      <?php include_once('../headers/navbar.blade.php'); ?>
-
-      <?php
+      <?php include_once('../headers/navbar.blade.php'); 
+      
       //caso não esteja logado ou não seja operador...
       if( empty($_SESSION['Login']) || $_SESSION['Perfil']!="Operador" ){
         header("Location: ../sessao/accessdenied.blade.php");
