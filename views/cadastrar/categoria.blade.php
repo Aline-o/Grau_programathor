@@ -1,13 +1,6 @@
 <?php 
 // CONEXÃO COM O BANCO
-include_once('../../BD/config.php');
-
-
-//caso não esteja logado ou não seja operador...
-if( empty($_SESSION['Login']) || $_SESSION['Perfil']!="Operador" )
-header("Location: ../sessao/accessdenied.blade.php");
-
-                    
+include_once('../../BD/config.php');                    
 
 if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
   extract($_REQUEST);
@@ -48,7 +41,13 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
     <div class="container-fluid">
       <?php include_once('../headers/navbar.blade.php'); ?>
 
-      
+      <?php
+      //caso não esteja logado ou não seja operador...
+      if( empty($_SESSION['Login']) || $_SESSION['Perfil']!="Operador" ){
+        header("Location: ../sessao/accessdenied.blade.php");
+        }
+      ?>
+            
 
         <main class="col-12 col-md-12 col-xl-12 py-md-3 pl-md-1 bd-content" role="main">
           
