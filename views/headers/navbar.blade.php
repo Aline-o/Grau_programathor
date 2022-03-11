@@ -36,6 +36,7 @@ session_start();
               <a class="dropdown-item" href="../visualizar/usuario.blade.php">Usuário</a>
               <a class="dropdown-item" href="../visualizar/cliente.blade.php">Cliente</a>
               <a class="dropdown-item" href="../visualizar/categoria.blade.php">Categoria</a>
+              <!--a class="dropdown-item" href="../visualizar/grafico.blade.php">Gráfico Clientes por Categoria</a-->
             </div>
           </li>
       </ul>
@@ -50,6 +51,7 @@ session_start();
           </button>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="../sessao/sair.php" type="button">Deslogar</a>
+            <a class="dropdown-item" href="../visualizar/grafico.blade.php" type="button">Gráfico Clientes por Categoria</a>
             <?php
               if( $_SESSION['Perfil']=="Operador" ){ //caso esteja logado...
             ?>
